@@ -162,41 +162,6 @@ http://127.0.0.1:8000/health
 
 ## Database
 
-Current tables:
-
-- `users`
-- `customers`
-- `transactions`
-- `alembic_version`
-
-Upcoming tables:
-
-- `alerts`
-- `investigation_cases`
-- `case_notes`
-- `case_decisions`
-- `audit_events`
-
-## Design Principles
-
-- Explainable detection before complex ML
-- Human-in-the-loop decisions for high-risk workflows
-- Clear separation between routes, schemas, services, and models
-- Database schema changes managed through migrations
-- Tests for core backend behavior
-- Secrets managed through environment variables
-
-## Roadmap
-
-1. Complete transaction APIs.
-2. Add deterministic rule-based alert generation.
-3. Build alert and case management workflow.
-4. Add audit logging for important actions.
-5. Add authentication and role-based access control.
-6. Add AI-assisted report drafting.
-7. Add policy retrieval for investigation support.
-8. Build frontend dashboard.
-9. Add Docker, deployment, logs, and monitoring.
 
 ## License
 
