@@ -1,0 +1,55 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# uv / Python packaging
+build/
+dist/
+*.egg-info/
+.python-version
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Private learning material and generated local artifacts
+docs/
+skills/
+.agents/
+notes.txt
+tmp/
+output/
+
+# Keep Alembic migrations and lockfiles tracked
+!backend/alembic/versions/*.py
+!backend/uv.lock
