@@ -18,6 +18,7 @@ ENV/
 .env
 .env.*
 !.env.example
+backend/app/core/key.py
 
 # uv / Python packaging
 build/

@@ -10,6 +10,7 @@ class User(SQLModel , table  =True):
     id: int | None = Field(default=None, primary_key=True)
     full_name :str = Field(max_length=225)
     email:str = Field(unique=True , index=True)
+    hashed_password: str
     role: UserRole = Field(default=UserRole.ANALYST)
     created_at :datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     updated_at :datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
