@@ -26,6 +26,8 @@ class AIInvestigationResult(BaseModel):
     evidence: list[str]
     recommended_action: str
     confidence: str = Field(description="LOW, MEDIUM, or HIGH")
+    data_gaps: list[str] = Field(default_factory=list)
+    edge_cases_or_contradictions: list[str] = Field(default_factory=list)
     
     
 #     AIInvestigationContext = jo data AI ko diya jayega

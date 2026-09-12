@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     openai_api_key: str | None = None
     openai_base_url: str | None = None
-    ai_model: str = "gpt-4o-mini"
+    ai_model: str = "openai/gpt-5-nano"
 
     langfuse_public_key: str | None = None
     langfuse_secret_key: str | None = None

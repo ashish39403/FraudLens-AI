@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from typing import Any
 
 from sqlalchemy import Column, JSON
 from sqlmodel import Field, SQLModel
