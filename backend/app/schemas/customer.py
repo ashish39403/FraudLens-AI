@@ -25,3 +25,4 @@ class CustomerRead(SQLModel):
     risk_level: RiskLevel
     created_at: datetime
     updated_at: datetime
+    

@@ -5,7 +5,10 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.pyright/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
 
 # Virtual environments
@@ -18,6 +21,7 @@ ENV/
 .env
 .env.*
 !.env.example
+.envrc
 backend/app/core/key.py
 
 # uv / Python packaging
@@ -42,6 +46,11 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# Local notebooks, smoke scripts, and scratch testing
+backend/testing/
+backend/testing_ai/
+*.ipynb_checkpoints/
 
 # Private learning material and generated local artifacts
 docs/
