@@ -1,4 +1,4 @@
-
+![image alt](https://github.com/ashish39403/FraudLens-AI/blob/5b02017b8c7a6430a565c0df5d69632bd80a5298/img_01.png)
 # FraudLens AI
 
 **AI-assisted fraud investigation and AML operations platform** for fintech transaction monitoring, alert review, case management, and audit-ready human decisions.
