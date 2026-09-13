@@ -1,4 +1,3 @@
-![FraudLens AI Banner](./assets/img_01.png)
 
 # FraudLens AI
 
