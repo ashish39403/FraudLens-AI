@@ -1,5 +1,7 @@
-# FraudLens AI
+![Uploading img_01.png…]()
 
+
+# FraudLens AI
 AI-assisted fraud investigation and AML operations platform for fintech transaction monitoring, alert review, case management, and audit-ready human decisions.
 
 ## Overview
