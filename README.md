@@ -1,8 +1,13 @@
-![Uploading img_01.png…]()
-
+![FraudLens AI Banner](./assets/img_01.png)
 
 # FraudLens AI
-AI-assisted fraud investigation and AML operations platform for fintech transaction monitoring, alert review, case management, and audit-ready human decisions.
+
+**AI-assisted fraud investigation and AML operations platform** for fintech transaction monitoring, alert review, case management, and audit-ready human decisions.
+
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.11x-009688)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791)
+![License](https://img.shields.io/badge/license-Personal%20Project-lightgrey)
 
 ## Overview
 
@@ -11,14 +16,24 @@ FraudLens AI is a production-oriented backend project for investigating suspicio
 The platform is designed around a practical investigation workflow:
 
 ```text
-Customer -> Transaction -> Rule Detection -> Alert -> Investigation Case -> Decision -> Audit Log
+Customer → Transaction → Rule Detection → Alert → Investigation Case → Decision → Audit Log
 ```
 
-The system starts with deterministic, explainable rule-based detection and adds AI only where it supports analysts, such as investigation report drafting and policy retrieval. High-risk decisions remain human-controlled.
+The system starts with **deterministic, explainable rule-based detection** and adds AI only where it supports analysts — such as investigation report drafting and policy retrieval. High-risk decisions remain human-controlled by design.
+
+## Table of Contents
+
+- [Current Status](#current-status)
+- [Tech Stack](#tech-stack)
+- [Backend Features](#backend-features)
+- [Architecture](#architecture)
+- [Local Setup](#local-setup)
+- [Database](#database)
+- [License](#license)
 
 ## Current Status
 
-Implemented:
+### ✅ Implemented
 
 - FastAPI application structure
 - Health check endpoint
@@ -28,14 +43,14 @@ Implemented:
 - Customer API
 - Automated tests with pytest
 
-In progress:
+### 🚧 In Progress
 
 - Transaction API
 - Rule-based alert generation
 - Case workflow
 - Audit logging
 
-Planned:
+### 📋 Planned
 
 - Authentication and role-based access control
 - AI-assisted investigation report drafts
@@ -46,23 +61,27 @@ Planned:
 
 ## Tech Stack
 
-- Python
-- FastAPI
-- SQLModel
-- PostgreSQL
-- Alembic
-- Pytest
-- Uvicorn
-- uv
+| Layer | Technology |
+|---|---|
+| Language | Python |
+| API Framework | FastAPI |
+| ORM | SQLModel |
+| Database | PostgreSQL |
+| Migrations | Alembic |
+| Testing | Pytest |
+| Server | Uvicorn |
+| Package Manager | uv |
 
 ## Backend Features
 
 ### Implemented
 
-- `GET /health`
-- `POST /api/v1/customers`
-- `GET /api/v1/customers`
-- `GET /api/v1/customers/{customer_id}`
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/health` | Health check |
+| POST | `/api/v1/customers` | Create customer |
+| GET | `/api/v1/customers` | List customers |
+| GET | `/api/v1/customers/{customer_id}` | Get customer by ID |
 
 ### Planned Core APIs
 
@@ -96,15 +115,15 @@ The backend follows a modular structure:
 
 ```text
 backend/
-  app/
-    api/routes/
-    core/
-    db/
-    models/
-    schemas/
-    services/
-  alembic/
-  tests/
+├── app/
+│   ├── api/routes/
+│   ├── core/
+│   ├── db/
+│   ├── models/
+│   ├── schemas/
+│   └── services/
+├── alembic/
+└── tests/
 ```
 
 ## Local Setup
@@ -150,20 +169,12 @@ uv run pytest
 uv run uvicorn app.main:app --reload
 ```
 
-API docs:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-Health check:
-
-```text
-http://127.0.0.1:8000/health
-```
+- API docs: `http://127.0.0.1:8000/docs`
+- Health check: `http://127.0.0.1:8000/health`
 
 ## Database
 
+_Schema diagram / ERD to be added._
 
 ## License
 
