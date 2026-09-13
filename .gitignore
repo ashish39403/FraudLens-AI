@@ -30,6 +30,33 @@ dist/
 *.egg-info/
 .python-version
 
+# Node / frontend dependencies
+node_modules/
+frontend/node_modules/
+frotend_aml/frontend/node_modules/
+
+# Frontend build outputs and caches
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+frontend/.vercel/
+frotend_aml/frontend/dist/
+frotend_aml/frontend/dist-ssr/
+frotend_aml/frontend/.vite/
+frotend_aml/frontend/.vercel/
+*.tsbuildinfo
+
+# Frontend test and QA artifacts
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frotend_aml/frontend/test-results/
+frotend_aml/frontend/playwright-report/
+frotend_aml/frontend/blob-report/
+check-*.png
+qa-*.png
+video-*.png
+
 # Logs and runtime files
 *.log
 logs/
@@ -59,6 +86,11 @@ skills/
 notes.txt
 tmp/
 output/
+
+# Local AI/design source exports for frontend experiments
+frotend_aml/
+frotend_aml/frames/
+frotend_aml/stich_code/
 
 # Keep Alembic migrations and lockfiles tracked
 !backend/alembic/versions/*.py
