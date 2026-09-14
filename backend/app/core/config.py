@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     openai_base_url: str | None = None
     ai_model: str = "openai/gpt-5-nano"
+    ai_request_timeout_seconds: int = 30
+    ai_max_retries: int = 2
 
     langfuse_public_key: str | None = None
     langfuse_secret_key: str | None = None

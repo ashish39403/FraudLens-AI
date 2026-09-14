@@ -35,3 +35,32 @@ class TransactionStatus(str, Enum):
     SUCCESS = "SUCCESS"
     FAILED = "FAILED"
     PENDING = "PENDING"
+    
+
+
+class AlertSeverity(str, Enum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
+
+
+class AlertStatus(str, Enum):
+    OPEN = "OPEN"
+    IN_REVIEW = "IN_REVIEW"
+    CLOSED = "CLOSED"
+    FALSE_POSITIVE = "FALSE_POSITIVE"
+
+
+class CaseStatus(str, Enum):
+    OPEN = "OPEN"
+    IN_REVIEW = "IN_REVIEW"
+    ESCALATED = "ESCALATED"
+    CLOSED = "CLOSED"
+
+
+class CasePriority(str, Enum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
