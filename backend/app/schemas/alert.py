@@ -1,6 +1,6 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 from datetime import datetime
-from app.models.alerts import AlertSeverity, AlertStatus
+from app.models.enums import AlertSeverity, AlertStatus
 
 
 # ---------- INPUT SCHEMAS ----------
@@ -36,5 +36,3 @@ class AlertRead(BaseModel):
     description: str
     created_at: datetime
     updated_at: datetime
-
-    # model_config = ConfigDict(from_attributes=True)  # SQLModel object se direct convert karne ke liye

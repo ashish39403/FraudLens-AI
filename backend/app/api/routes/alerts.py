@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlmodel import Session
 
-from app.db.session import get_session  # tumhara session dependency (naam confirm karo)
+from app.db.session import get_session
 from app.services import alert_service
 from app.schemas.alert import AlertCreate, AlertRead, AlertUpdate
 from app.models.enums import AlertStatus, AlertSeverity
 
-router = APIRouter(prefix="/alerts", tags=["alerts"])
+router = APIRouter(prefix="/api/v1/alerts", tags=["alerts"])
 
 
 @router.post("/", response_model=AlertRead)
