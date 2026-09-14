@@ -24,7 +24,7 @@ def _build_structured_llm():
         model=settings.ai_model,
         api_key=settings.openai_api_key,
         base_url=settings.openai_base_url,
-        temperature=0,
+        temperature=0.1,
         timeout=settings.ai_request_timeout_seconds,
         max_retries=0,
     )
