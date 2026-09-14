@@ -70,3 +70,26 @@ def test_create_high_amount_transaction_creates_alert():
 
     assert matching_alerts
     assert matching_alerts[0]["severity"] == "HIGH"
+
+
+def test_create_outbound_wire_transaction_creates_wire_alert():
+    customer_id = create_customer(risk_level="LOW")
+    transaction_response = create_transaction(customer_id, amount=5000.0)
+
+    assert transaction_response.status_code == 201
+    transaction_id = transaction_response.json()["id"]
+
+    alerts_response = client.get("/api/v1/alerts")
+
+    assert alerts_response.status_code == 200
+    alerts = alerts_response.json()
+
+    matching_alerts = [
+        alert
+        for alert in alerts
+        if alert["transaction_id"] == transaction_id
+        and alert["rule_name"] == "outbound_wire_transfer"
+    ]
+
+    assert matching_alerts
+    assert matching_alerts[0]["severity"] == "MEDIUM"

@@ -9,13 +9,13 @@ from app.models.enums import AlertStatus, AlertSeverity
 router = APIRouter(prefix="/api/v1/alerts", tags=["alerts"])
 
 
-@router.post("/", response_model=AlertRead)
+@router.post("", response_model=AlertRead)
 def create_alert(alert: AlertCreate, session: Session = Depends(get_session)):
     """Naya alert banao"""
     return alert_service.create_alert(session, alert)
 
 
-@router.get("/", response_model=list[AlertRead])
+@router.get("", response_model=list[AlertRead])
 def list_alerts(
     status: AlertStatus | None = Query(default=None),
     severity: AlertSeverity | None = Query(default=None),

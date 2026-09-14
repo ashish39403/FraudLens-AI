@@ -26,7 +26,7 @@ def create_transaction(session: Session, transaction_data: TransactionCreate) ->
         ).all()
     )
 
-    for triggered_rule in evaluate_transaction(transaction, recent_transactions):
+    for triggered_rule in evaluate_transaction(transaction, recent_transactions, customer):
         create_alert(
             session,
             AlertCreate(

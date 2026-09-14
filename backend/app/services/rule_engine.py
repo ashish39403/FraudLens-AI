@@ -1,6 +1,7 @@
 from decimal import Decimal
+from app.models.customer import Customer
 from app.models.transaction import Transaction
-from app.models.enums import AlertSeverity, TransactionType, TransactionDirection
+from app.models.enums import AlertSeverity, RiskLevel, TransactionType, TransactionDirection
 
 # ---------- CONFIG THRESHOLDS ----------
 HIGH_AMOUNT_THRESHOLD = Decimal("100000")       # ₹1,00,000 se upar = suspicious
@@ -47,6 +48,23 @@ def check_large_cash_withdrawal(transaction: Transaction) -> tuple[bool, str, Al
     return None
 
 
+def check_high_risk_customer(customer: Customer | None) -> tuple[bool, str, AlertSeverity] | None:
+    """High-risk customer activity should be reviewed even if amount is not huge."""
+    if customer and customer.risk_level == RiskLevel.HIGH:
+        return True, "high_risk_customer_activity", AlertSeverity.HIGH
+    return None
+
+
+def check_outbound_wire_transfer(transaction: Transaction) -> tuple[bool, str, AlertSeverity] | None:
+    """Outbound wire transfer is a common AML review signal."""
+    if (
+        transaction.transaction_type == TransactionType.WIRE
+        and transaction.direction == TransactionDirection.OUTBOUND
+    ):
+        return True, "outbound_wire_transfer", AlertSeverity.MEDIUM
+    return None
+
+
 def check_failed_transaction_spike(recent_transactions: list[Transaction], failed_threshold: int = 3) -> tuple[bool, str, AlertSeverity] | None:
     """Bahut saare FAILED transactions ek saath - card testing/fraud attempt ka sign"""
     from app.models.enums import TransactionStatus
@@ -62,6 +80,7 @@ def check_failed_transaction_spike(recent_transactions: list[Transaction], faile
 def evaluate_transaction(
     transaction: Transaction,
     recent_transactions: list[Transaction] | None = None,
+    customer: Customer | None = None,
 ) -> list[dict]:
     """
     Ek transaction ko saare rules se check karo.
@@ -73,6 +92,8 @@ def evaluate_transaction(
         check_high_amount(transaction),
         check_odd_hour_transaction(transaction),
         check_large_cash_withdrawal(transaction),
+        check_high_risk_customer(customer),
+        check_outbound_wire_transfer(transaction),
     ]
 
     if recent_transactions is not None:

@@ -6,6 +6,15 @@ from app.schemas.alert import AlertCreate, AlertUpdate
 
 def create_alert(session: Session, alert_data: AlertCreate) -> Alerts:
     """Save new alert in the Database"""
+    existing_alert = session.exec(
+        select(Alerts).where(
+            Alerts.transaction_id == alert_data.transaction_id,
+            Alerts.rule_name == alert_data.rule_name,
+        )
+    ).first()
+    if existing_alert:
+        return existing_alert
+
     db_alert = Alerts(**alert_data.model_dump())
     session.add(db_alert)
     session.commit()
@@ -36,7 +45,7 @@ def get_alerts(
     if customer_id:
         query = query.where(Alerts.customer_id == customer_id)
 
-    query = query.offset(skip).limit(limit)
+    query = query.order_by(Alerts.created_at.desc()).offset(skip).limit(limit)
     return session.exec(query).all()
 
 
