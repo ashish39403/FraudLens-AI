@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     secret_key:str
     algorithm:str ="HS256"
     access_token_expire_minutes:int =30
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
 
     openai_api_key: str | None = None
     openai_base_url: str | None = None
@@ -29,4 +30,12 @@ class Settings(BaseSettings):
     
     
 settings =Settings()
+
+
+def get_cors_origins() -> list[str]:
+    return [
+        origin.strip()
+        for origin in settings.cors_origins.split(",")
+        if origin.strip()
+    ]
     

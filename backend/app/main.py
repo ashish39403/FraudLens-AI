@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes.ai import router as ai_router
 from app.api.routes.auth import router as auth_router
 from app.api.routes.health import  router as health_router
@@ -6,8 +7,17 @@ from app.api.routes.customers import router as customers_router
 from app.api.routes.transactions import router as transaction_router
 from app.api.routes.alerts import router as alerts_router
 from app.api.routes.cases import router as cases_router
+from app.core.config import get_cors_origins
 
 app = FastAPI(title="Fraud AML Investigation Platform")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=get_cors_origins(),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 app.include_router(health_router)

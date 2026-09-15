@@ -5,9 +5,15 @@ import type { Session } from '../types'
 
 function initialSession(): Session | null {
   try {
-    const stored = isDemo ? sessionStorage.getItem('fraudlens.session') : null
+    const stored = sessionStorage.getItem('fraudlens.session')
     const value = stored ? (JSON.parse(stored) as Session) : null
-    return value?.user?.email && value.access_token === 'local-demo-session' ? value : null
+    const validDemo = isDemo && value?.access_token === 'local-demo-session'
+    const validApi = !isDemo && Boolean(value?.access_token)
+    if (value?.user?.email && (validDemo || validApi)) {
+      setAccessToken(value.access_token)
+      return value
+    }
+    return null
   } catch {
     return null
   }
@@ -36,12 +42,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const next = await repository.login(email, password)
     setAccessToken(next.access_token)
     setSession(next)
-    if (isDemo)
-      try {
-        sessionStorage.setItem('fraudlens.session', JSON.stringify(next))
-      } catch {
-        /* Storage optional. */
-      }
+    try {
+      sessionStorage.setItem('fraudlens.session', JSON.stringify(next))
+    } catch {
+      /* Storage optional. */
+    }
   }
   return <AuthContext.Provider value={{ session, login, logout }}>{children}</AuthContext.Provider>
 }

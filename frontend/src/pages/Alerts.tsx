@@ -5,7 +5,6 @@ import { useData } from '../app/DataContext'
 import { useAuth } from '../app/AuthContext'
 import { useAction } from '../hooks/useAction'
 import { repository } from '../services/repository'
-import { isDemo } from '../services/client'
 import {
   Badge,
   Button,
@@ -54,7 +53,7 @@ function AlertDetail({ alert, onClose }: { alert: Alert; onClose: () => void }) 
       <label className="form-field">
         Status
         <select value={status} onChange={(e) => setStatus(e.target.value as AlertStatus)}>
-          {(['NEW', 'IN_REVIEW', 'RESOLVED'] as const).map((s) => (
+          {(['OPEN', 'IN_REVIEW', 'CLOSED', 'FALSE_POSITIVE'] as const).map((s) => (
             <option key={s} value={s}>
               {label(s)}
             </option>
@@ -108,18 +107,13 @@ export default function Alerts() {
       >
         <span className="count-label">
           <Bell size={14} />
-          {data.alerts.filter((a) => a.status === 'NEW').length} awaiting review
+          {data.alerts.filter((a) => a.status === 'OPEN').length} awaiting review
         </span>
       </PageHeader>
-      {!isDemo && (
-        <div className="ai-notice">
-          The alerts API is planned. Alert workflows are available in demo mode.
-        </div>
-      )}
       <div className="summary-strip">
         <span>
           <i className="legend-dot risk-high" />
-          {data.alerts.filter((a) => a.severity === 'HIGH' && a.status !== 'RESOLVED').length}{' '}
+          {data.alerts.filter((a) => a.severity === 'HIGH' && a.status !== 'CLOSED').length}{' '}
           high-risk unresolved
         </span>
         <span>
@@ -128,7 +122,7 @@ export default function Alerts() {
         </span>
         <span>
           <i className="legend-dot risk-low" />
-          {data.alerts.filter((a) => a.status === 'RESOLVED').length} resolved
+          {data.alerts.filter((a) => a.status === 'CLOSED').length} closed
         </span>
       </div>
       <section className="panel">
@@ -143,13 +137,13 @@ export default function Alerts() {
               label="Severities"
               value={severity}
               onChange={setSeverity}
-              options={['HIGH', 'MEDIUM', 'LOW']}
+              options={['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']}
             />
             <Filter
               label="Statuses"
               value={status}
               onChange={setStatus}
-              options={['NEW', 'IN_REVIEW', 'RESOLVED']}
+              options={['OPEN', 'IN_REVIEW', 'CLOSED', 'FALSE_POSITIVE']}
             />
           </div>
         </div>

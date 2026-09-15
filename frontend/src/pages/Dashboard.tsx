@@ -29,7 +29,7 @@ export default function Dashboard() {
   cutoff.setUTCHours(0, 0, 0, 0)
   cutoff.setUTCDate(cutoff.getUTCDate() - days + 1)
   const transactions = data.transactions.filter((t) => new Date(t.occurred_at) >= cutoff)
-  const highAlerts = data.alerts.filter((a) => a.severity === 'HIGH' && a.status !== 'RESOLVED')
+  const highAlerts = data.alerts.filter((a) => a.severity === 'HIGH' && a.status !== 'CLOSED')
   const openCases = data.cases.filter((c) => c.status !== 'CLOSED')
   const metrics = [
     {

@@ -13,7 +13,6 @@ import { useData } from '../app/DataContext'
 import { useAuth } from '../app/AuthContext'
 import { useAction } from '../hooks/useAction'
 import { repository } from '../services/repository'
-import { isDemo } from '../services/client'
 import { Badge, Button, EmptyState, Feedback, PageHeader, SearchInput } from '../components/ui'
 import { Drawer } from '../components/Drawer'
 import { initials, label, timestamp } from '../lib/format'
@@ -150,11 +149,6 @@ export default function Cases() {
           Create case from report
         </Link>
       </PageHeader>
-      {!isDemo && (
-        <div className="ai-notice">
-          The cases API is planned. Case management is available in demo mode.
-        </div>
-      )}
       <div className="case-toolbar">
         <SearchInput
           value={search}
@@ -248,13 +242,17 @@ export default function Cases() {
                       </td>
                       <td>{c.assignee}</td>
                       <td>
-                        <Link
-                          className="text-link"
-                          to={`/app/investigations?report=${c.report_id}`}
-                        >
-                          RPT-{c.report_id}
-                          <ArrowUpRight size={13} />
-                        </Link>
+                        {c.report_id ? (
+                          <Link
+                            className="text-link"
+                            to={`/app/investigations?report=${c.report_id}`}
+                          >
+                            RPT-{c.report_id}
+                            <ArrowUpRight size={13} />
+                          </Link>
+                        ) : (
+                          <span className="muted">No report linked</span>
+                        )}
                       </td>
                     </tr>
                   ))}

@@ -110,7 +110,6 @@ function ReportDetail({ report }: { report: Investigation }) {
         <p>{report.recommended_action}</p>
         <Button
           variant="primary"
-          disabled={!isDemo}
           busy={action.pending}
           onClick={() =>
             void action.run(async () => {
@@ -195,7 +194,7 @@ export default function Investigations() {
         <span>
           {isDemo
             ? 'Demo reports use simulated analysis.'
-            : 'Generated reports remain available in this session; the backend does not yet expose report history.'}{' '}
+            : 'Generated reports are loaded from the backend and can be linked to case records.'}{' '}
           All findings require human review.
         </span>
       </div>
