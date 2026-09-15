@@ -1,5 +1,5 @@
-export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH'
-export type AlertStatus = 'NEW' | 'IN_REVIEW' | 'RESOLVED'
+export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+export type AlertStatus = 'OPEN' | 'IN_REVIEW' | 'CLOSED' | 'FALSE_POSITIVE'
 export type CaseStatus = 'OPEN' | 'IN_REVIEW' | 'ESCALATED' | 'CLOSED'
 export interface Customer {
   id: number
@@ -54,6 +54,7 @@ export interface Alert {
   severity: RiskLevel
   status: AlertStatus
   created_at: string
+  updated_at?: string
 }
 export interface CaseNote {
   id: string
@@ -63,6 +64,8 @@ export interface CaseNote {
 }
 export interface Case {
   id: number
+  alert_id?: number
+  transaction_id?: number
   title: string
   customer_id: number
   report_id: number
@@ -70,6 +73,8 @@ export interface Case {
   priority: RiskLevel
   assignee: string
   created_at: string
+  updated_at?: string
+  closed_at?: string | null
   notes: CaseNote[]
 }
 export interface AuditLog {
@@ -91,9 +96,19 @@ export interface User {
   id: number
   full_name: string
   email: string
-  role: string
+  role: UserRole
+  is_active?: boolean
+  created_at?: string
+  updated_at?: string
 }
 export interface Session {
   user: User
   access_token: string
+}
+export type UserRole = 'ANALYST' | 'REVIEWER' | 'MANAGER' | 'ADMIN'
+export interface RegistrationInput {
+  full_name: string
+  email: string
+  password: string
+  role: UserRole
 }

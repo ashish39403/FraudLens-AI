@@ -42,7 +42,7 @@ export function AppShell() {
   const [helpOpen, setHelpOpen] = useState(false)
   const mobileMenu = useRef<HTMLDialogElement>(null)
   const current = navigation.find((n) => location.pathname.includes(n.path))?.label ?? 'Workspace'
-  const alertCount = data?.alerts.filter((a) => a.status === 'NEW').length ?? 0
+  const alertCount = data?.alerts.filter((a) => a.status === 'OPEN').length ?? 0
   useEffect(() => {
     document.title = `${current} · FraudLens AI`
     window.scrollTo(0, 0)
@@ -219,8 +219,8 @@ export function AppShell() {
             </p>
             <h3>API integration</h3>
             <p>
-              The service layer supports the existing FastAPI customer, transaction, authentication,
-              and investigation endpoints. Alerts, cases, and audit APIs are planned.
+              The service layer connects to the FastAPI authentication, customer, transaction,
+              alert, case, and AI investigation endpoints. Audit logs are still local-only.
             </p>
             <Link className="text-link" to="/" onClick={() => setHelpOpen(false)}>
               Explore FraudLens AI <ChevronRight size={15} />

@@ -37,7 +37,7 @@ src/
   app/          Router, authentication, shared data providers
   components/   Shell, UI primitives, drawers, charts, tables, search
     landing/    Product story, scroll sequence, background film, scoped styles
-  pages/        Landing, login, and seven workspace pages
+  pages/        Landing, login, signup, and seven workspace pages
   data/         Typed synthetic seed and deterministic report generator
   services/     HTTP client and swappable repository
   hooks/        Async mutation state
@@ -68,6 +68,14 @@ The hero artwork spans the entire viewport. The Trace / Investigate / Decide sec
 Generated with the **built-in image_gen tool**. Original deliverables are saved in [trace.png](design/generated/trace.png), [investigate.png](design/generated/investigate.png), and [decide.png](design/generated/decide.png). The exact final prompt set and generation mode are in [prompts.json](design/generated/prompts.json). Optimized desktop and mobile WebP assets live in [public/landing/art](public/landing/art); all six total about 298 KiB. Originals are kept outside the public directory so they are not shipped in the production bundle.
 
 The landing page also includes an original ambient score synthesized with Web Audio: slow sustained chords, soft filtered tones, and a reverb tail. Audio attempts to start automatically at a fixed 44% level. If browser autoplay policy blocks it, the first click or keypress starts playback. There is no on/off button or volume slider on the page. Hiding the tab suspends audio; leaving the public page closes the audio context. No external music service, downloaded track, or API key is required. The background video remains muted independently.
+
+## Account registration
+
+Open /signup from the sign-in page. The shared auth layout provides a sliding transition, keyboard focus management, and reduced-motion support. Signup sends exactly full_name, email, password, and role to POST /api/v1/auth/register. Roles mirror the backend enum: ANALYST (default), REVIEWER, MANAGER, and ADMIN. Authorization and permitted role assignment are the backend’s responsibility.
+
+The form matches the backend password requirements (8+ characters, uppercase, lowercase, and a number), validates the name length, and displays duplicate-email / validation errors. Successful registration returns to login with the email filled in and the original protected destination preserved. Passwords are never placed in router state or browser storage.
+
+In demo mode only, new accounts use an in-memory salted PBKDF2 verifier and last until reload. The existing demo account still works. API mode uses the backend for durable account storage. Registration tests exercise the API contract with mocked HTTP responses; they do not create real user accounts.
 
 ## FastAPI integration
 

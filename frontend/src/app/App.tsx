@@ -4,9 +4,11 @@ import { AuthProvider, useAuth } from './AuthContext'
 import { DataProvider } from './DataContext'
 import { AppShell } from '../components/AppShell'
 import { Brand, Button, LoadingState } from '../components/ui'
+import { AuthLayout } from '../components/auth/AuthLayout'
 
 const Landing = lazy(() => import('../pages/Landing'))
 const Login = lazy(() => import('../pages/Login'))
+const Signup = lazy(() => import('../pages/Signup'))
 const Dashboard = lazy(() => import('../pages/Dashboard'))
 const Customers = lazy(() => import('../pages/Customers'))
 const Transactions = lazy(() => import('../pages/Transactions'))
@@ -70,7 +72,10 @@ export function App() {
           <Suspense fallback={<LoadingState />}>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
+              <Route element={<AuthLayout />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </Route>
               <Route element={<ProtectedRoute />}>
                 <Route path="/app" element={<AppShell />}>
                   <Route index element={<Navigate to="dashboard" replace />} />

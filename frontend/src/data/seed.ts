@@ -160,7 +160,7 @@ export const seed: Dataset = {
       rule_name: t.risk_signals?.[0] ?? 'Activity deviation',
       description: `${t.counterparty_name} · Activity requires analyst review against the expected customer profile.`,
       severity: t.risk_level ?? 'MEDIUM',
-      status: i > 7 ? 'RESOLVED' : i > 4 ? 'IN_REVIEW' : 'NEW',
+      status: i > 7 ? 'CLOSED' : i > 4 ? 'IN_REVIEW' : 'OPEN',
       created_at: t.occurred_at,
     })),
   cases: investigations
